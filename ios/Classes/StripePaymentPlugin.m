@@ -18,6 +18,7 @@
   }
   else if ([@"setPublishableKey" isEqualToString:call.method]) {
       [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:call.arguments];
+      [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:@"merchant.com.breakuptours"];
   }
   else {
       result(FlutterMethodNotImplemented);

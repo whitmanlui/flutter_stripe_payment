@@ -22,4 +22,19 @@ class StripeSource {
     _channel.invokeMethod('setPublishableKey', apiKey);
     _publishableKeySet = true;
   }
+
+  static Future<void> applyPayment() async {
+    String returnMsg;
+    try {
+      final bool result = await _channel.invokeMethod('checkIfDeviceSupportsApplePay');
+      if(result){
+        final String status = await _channel.invokeMethod('handleApplePayButtonTapped');
+        print(status);
+      }
+      returnMsg = '$result';
+    } catch (e) {
+      returnMsg = "Failed: '${e.message}'.";
+    }
+    print(returnMsg);
+  }
 }
